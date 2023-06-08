@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>test constructor</title>
+
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body> 
+    <main class="main">
+      <div class="container">
+        <div class="main__constructor">
+          <form action="#" ></form>
+          <div class="main__form form">
+            <div class="form__name">
+              <input type="text" placeholder="название теста" name="question-name" value="">
+            </div>
+              
+
+              <!-- Кнопки для перехода между вопросами -->
+              <ul class="form__questions-list">
+                <li class="form__questions-list-item form__questions-list-item_active">1</li>
+              </ul>
+
+
+              <!-- Поле с вопросом -->
+              <div class="form__question question">
+                <!-- Кнопки удаления и добавления вопроса -->
+                <div class="from__question-buttons">
+                  <button class="from__question-button from__question-button_add" type="submit">+</button>
+                  <button class="from__question-button from__question-button_delete" type="submit">x</button>
+                </div>
+
+                
+                <!-- Текст вопроса -->
+                <div class="question__text">
+                  <textarea name="question-text" id="1" placeholder="вопрос"></textarea>
+                </div>
+                
+
+                <!-- Список ответов с вариантами ответов -->
+                <ul class="question__answers-list">
+                  <li class="question__answer">
+                    <input class="question__answer-checkbox" type="checkbox" id="answer1" name="answer1">
+                    <label for="answer1">
+                      <input class="question__answer-input-text" type="text" name="answer-text1" placeholder="ответ">
+                    </label>
+                  </li>
+                  <li class="question__answer">
+                    <input class="question__answer-checkbox" type="checkbox" id="answer2" name="answer2">
+                    <label for="answer2">
+                      <input class="question__answer-input-text" type="text" name="answer-text2" placeholder="ответ">
+                    </label>
+                  </li>
+                  <li class="question__answer">
+                    <input class="question__answer-checkbox" type="checkbox" id="answer3" name="answer3">
+                    <label for="answer3">
+                      <input class="question__answer-input-text" type="text" name="answer-text3" placeholder="ответ">
+                    </label>
+                  </li>
+                  <li class="question__answer">
+                    <input class="question__answer-checkbox" type="checkbox" id="answer4" name="answer4">
+                    <label for="answer4">
+                      <input class="question__answer-input-text" type="text" name="answer-text4" placeholder="ответ">
+                    </label>
+                  </li>
+                </ul>
+
+
+                <!-- поле для ввода свободного ответа -->
+                <div class="form__free-answer-field">
+                  <input class="form__free-answer-field-input-text" type="text" name="free-answer-field" placeholder="ответ">
+                </div>
+
+
+                <!-- кнопка свободного ответа -->
+                <div class="form__free-answer-buttons">
+                  <button class="form__free-answer-button button">свободный ответ</button>
+                </div>
+              </div>
+      
+
+              <!-- Кнопки предыдущий следующий -->
+              <div class="form__buttons">
+                <button class="form__previous-button button" type="submit">предыдущий</button>
+                <button class="form__next-button button" type="submit">следующий</button>
+              </div>
+
+              <div class="form__variants-count">
+                <p class="form__variants-count-label">количество вариантов: </p>
+                <input type="text" name="variants-count" value="1">
+              </div>
+      
+              <div class="form__create-button">
+                <button class="button" type="submit">создать</button>
+              </div>
+          </div>        
+        </div>
+
+
+        <!-- PDF файл в разметке HTML вариант -->
+        <div class="pdf-block">
+          <div class="pdf">
+            <p class="pdf__test-name">Тест по СССР</p>
+            <p class="pdf__variant-number">Вариант 1</p>
+
+            <div class="pdf__question">
+              <p class="pdf__question-text">1 Первый президент советского союза?</p>
+              <ul class="pdf__answers-list">
+                <li class="pdf__answer">1. Ленин</li>
+                <li class="pdf__answer">2. Путин</li>
+                <li class="pdf__answer">3. Ельцин</li>
+                <li class="pdf__answer">4. Горбачов</li>
+              </ul>
+              <p class="pdf__answer-field">Ответ: _____</p>
+            </div>
+
+            <div class="pdf__question-free">
+              <p class="pdf__question-text">3 2 + 2 = ?</p>
+              <p class="pdf__answer-field">Ответ: _____</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- PDF файл в разметке HTML ответы -->
+      <div class="pdf-answers-block">
+        <div class="pdf-answers">
+          <p class="pdf-answers__number">вариант 1</p>
+          <p class="pdf-answers__string">1.2   2.2   3.4</p>
+        </div>
+      </div>
+    </main>
+  </body>
+  
+  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+  <script type="module">
+    import {getPdfs} from "./js/main.js"
+    
+    const downloadPdf = (name, PdfInHtml) => {
+      html2pdf()
+          .set({
+            filename: name
+          })
+          .from(PdfInHtml)
+          .save();
+    };
+
+    document.querySelector('.form__create-button').addEventListener('click', getPdfs(downloadPdf));
+  </script>
+</html>
